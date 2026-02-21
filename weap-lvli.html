@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -121,13 +121,35 @@
         </div>
     </div>
 
-    <div class="row disabled-ui">
-        <div class="col">
+    <div class="row sakr-output-row">
+        <div class="col disabled-ui ">
             <div id="exportdataform">
                 <button class="generate-btn">Generate INI</button>
                 <button class="copy-btn">Copy</button>
                 <button class="export-btn">Export</button>
                 <textarea readonly autocomplete="off"></textarea>
+            </div>
+        </div>
+        <div class="col">
+            <div class="sakr-help-panel">
+                <p>This tool is designed for use with <a href="https://www.nexusmods.com/fallout4/mods/69798">RobCo Patcher.</a></p>
+                <p><strong>Instructions:</strong></p>
+                <ol>
+                    <li>Download this <a href="scripts/fo4edit/WEAP_Export_For_KinataSorter.pas" download="WEAP_Export_For_KinataSorter.pas">FO4Edit script</a> and copy it to <code>FO4Edit\Edit Scripts</code>.</li>
+                    <li>Run FO4Edit with your weapon mods, select the ones you want to add to leveled lists, right-click, and choose <code>Apply Script</code>.</li>
+                    <li>Enter <code>WEAP_Export_For_KinataSorter</code> in search, run the script, and save the result.</li>
+                    <li>Upload the file to this site and specify how your weapons should be distributed.</li>
+                    <li>To get the result, click <code>Generate INI</code> and <code>Export</code>, then unpack the resulting archive into the <code>Data</code> folder.</li>
+                    <li>In-game, enter an interior cell and wait 72 hours so leveled lists can refresh.</li>
+                </ol>
+                <p><strong>Notes:</strong></p>
+                <ol>
+                    <li>If you do not specify a faction, the weapon will appear for all NPCs.</li>
+                    <li>Auto Complete relies on keywords in the mod. If the mod author did not add them or added them incorrectly, you will need to assign everything manually.</li>
+                    <li>The script does not detect which weapons are unique and should appear only as a single copy.</li>
+                </ol>
+                    <p>This is an alpha version. <a href="https://boosty.to/kinatahoru">If you like what I am doing, thank me</a>. Cya!</p>
+                    <p>Icons provided by <a href="https://sergeychikin.ru/365/">Sergey Chikin</a> and Bethesda.</p>
             </div>
         </div>
     </div>
@@ -137,3 +159,4 @@
 <script src="js/WEAPLvli.js"></script>
 </body>
 </html>
+
