@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Kinata WEAP LVLI Builder</title>
+<link rel="stylesheet" href="style\main.css">
+</head>
+<body>
+<div class="main-container">
+    <h1>Kinata WEAP LVLI Builder</h1>
+
+    <div class="row">
+        <div class="col col-narrow">
+            <div class="file-upload-container file-upload-text">
+                <div id="weapBtn" class="file-upload-primary" role="button" tabindex="0" aria-label="Upload WEAP TXT">
+                    <h2 id="weapUploadTitle" class="section-title">Click here to upload your txt-file</h2>
+                </div>
+                <span id="weapUploadAnother" class="file-upload-another is-hidden" role="button" tabindex="0">Upload another file</span>
+                <input type="file" id="weapFile" accept=".txt" autocomplete="off" hidden>
+            </div>
+
+            <div class="disabled-ui">
+                <div class="row">
+                    <div class="col">
+                        <input type="text" id="edidSearch" placeholder="Search weapon..." autocomplete="off">
+                    </div>
+                </div>
+
+                <div id="edidList"></div>
+
+                <div class="row toggle-controls">
+                    <div class="col">
+                        <label class="switch">
+                            <input type="checkbox" class="switch-input" id="showNotEditedToggle" autocomplete="off">
+                            <span class="slider"></span>
+                            <span class="switch-text">Only not edited</span>
+                        </label>
+                    </div>
+                    <div class="col">
+                        <label class="switch">
+                            <input type="checkbox" class="switch-input" id="multiSelectToggle" autocomplete="off">
+                            <span class="slider"></span>
+                            <span class="switch-text">Multi-selection</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button type="button" id="autoCompleteBtn" class="copy-btn">Auto Complite</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col col-wide disabled-ui">
+            <h2 class="section-title">Leveled Lists</h2>
+            <div id="keywordContainer">
+                <div class="weap-lvli-grid weap-mode-panel" data-mode="distribute">
+                    <section class="weap-lvli-group">
+                        <h3>Types</h3>
+                        <div class="weap-options-rows">
+                            <div class="weap-options-row">
+                                <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="DIST_PISTOL"><span><img class="weap-type-option-icon" src="icons/weaponTypes/pistol.svg" alt="">Pistol</span></label>
+                                <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="DIST_SHOTGUN"><span><img class="weap-type-option-icon" src="icons/weaponTypes/Shotgun.svg" alt="">Shotgun</span></label>
+                                <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="DIST_ASSAULT_RIFLE"><span><img class="weap-type-option-icon" src="icons/weaponTypes/Assault.svg" alt="">Assault Rifle</span></label>
+                                <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="DIST_SNIPER_RIFLE"><span><img class="weap-type-option-icon" src="icons/weaponTypes/sniper.svg" alt="">Sniper Rifle</span></label>
+                            </div>
+                            <div class="weap-options-row">
+                                <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="DIST_LASER_GUN"><span><img class="weap-type-option-icon" src="icons/weaponTypes/Energy.svg" alt="">Laser Gun</span></label>
+                                <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="DIST_PLASMA_GUN"><span><img class="weap-type-option-icon" src="icons/weaponTypes/Plasma.svg" alt="">Plasma Gun</span></label>
+                                <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="DIST_MINIGUN"><span><img class="weap-type-option-icon" src="icons/weaponTypes/Heavy.svg" alt="">Minigun</span></label>
+                                <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="DIST_MISSILE_LAUNCHER"><span><img class="weap-type-option-icon" src="icons/weaponTypes/Louncher.svg" alt="">Missile Launcher</span></label>
+                            </div>
+                            <div class="weap-options-row">
+                                <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="DIST_1H_MELEE"><span><img class="weap-type-option-icon" src="icons/weaponTypes/1hmelee.svg" alt="">1-hand Melee</span></label>
+                                <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="DIST_2H_MELEE"><span><img class="weap-type-option-icon" src="icons/weaponTypes/2hmelee.svg" alt="">2-hand melee</span></label>
+                                <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="DIST_KNUCKLES"><span><img class="weap-type-option-icon" src="icons/weaponTypes/2hmelee.svg" alt="">Knuckles</span></label>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="weap-lvli-grid weap-mode-panel" data-mode="factions">
+                    <section class="weap-lvli-group">
+                        <h3>Factions</h3>
+                        <div class="weap-options-rows">
+                            <div class="weap-options-row">
+                                <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="FAC_MINUTEMEN"><span><img class="weap-type-option-icon" src="icons/factions/Minuteman.svg" alt="">Minutemen</span></label>
+                                <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="FAC_BOS"><span><img class="weap-type-option-icon" src="icons/factions/BOS.svg" alt="">BOS</span></label>
+                                <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="FAC_RAILROAD"><span><img class="weap-type-option-icon" src="icons/factions/Railroad.svg" alt="">Railroad</span></label>
+                                <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="FAC_INSTITUTE"><span><img class="weap-type-option-icon" src="icons/factions/Institute.svg" alt="">Institute</span></label>
+                            </div>
+                            <div class="weap-options-row">
+                                <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="FAC_RAIDERS"><span><img class="weap-type-option-icon" src="icons/factions/Raiders.svg" alt="">Raiders</span></label>
+                                <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="FAC_GUNNERS"><span><img class="weap-type-option-icon" src="icons/factions/Gunners.svg" alt="">Gunners</span></label>
+                                <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="FAC_TRIGGERMEN"><span><img class="weap-type-option-icon" src="icons/factions/Triggermen.svg" alt="">Trigger</span></label>
+                            </div>
+                            <div class="weap-options-row">
+                                <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="FAC_DC_SECURITY"><span><img class="weap-type-option-icon" src="icons/factions/DaimondCity.svg" alt="">Daimond City</span></label>
+                                <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="FAC_CITIZEN"><span><img class="weap-type-option-icon" src="icons/factions/Citizens.svg" alt="">Citizen</span></label>
+                            </div>
+                            <div class="weap-options-row">
+                                <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="FAC_BOTRAIDER"><span><img class="weap-type-option-icon" src="icons/factions/Robot.svg" alt="">Automatron</span></label>
+                                <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="FAC_TRAPPERS"><span><img class="weap-type-option-icon" src="icons/factions/Knuckles.svg" alt="">Trappers</span></label>
+                                <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="FAC_NUKA_WORLD"><span><img class="weap-type-option-icon" src="icons/factions/Nukaworld.svg" alt="">Nuka</span></label>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="weap-lvli-grid weap-mode-panel" data-mode="special">
+                    <section class="weap-lvli-group weap-special-row">
+                        <h3>Special</h3>
+                        <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="SPEC_GRENADE"><span><img class="weap-type-option-icon" src="icons/weaponTypes/grenade.svg" alt="">Grenade</span></label>
+                        <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="SPEC_ENERGY_GRENADE"><span><img class="weap-type-option-icon" src="icons/weaponTypes/Energy.svg" alt="">Energy Grenade</span></label>
+                        <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="SPEC_MINE"><span><img class="weap-type-option-icon" src="icons/weaponTypes/mine.svg" alt="">Mine</span></label>
+                        <label class="weap-lvli-option segmented-check-item"><input type="checkbox" value="SPEC_VENDORS"><span><img class="weap-type-option-icon" src="icons/factions/shop.svg" alt="">Vendors distribution</span></label>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row disabled-ui">
+        <div class="col">
+            <div id="exportdataform">
+                <button class="generate-btn">Generate INI</button>
+                <button class="copy-btn">Copy</button>
+                <button class="export-btn">Export</button>
+                <textarea readonly autocomplete="off"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/kinata-meme-api.js"></script>
+<script src="js/WEAPLvli.js"></script>
+</body>
+</html>

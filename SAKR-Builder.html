@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Kinata SAKR Builder</title>
+<link rel="stylesheet" href="style\main.css">
+
+</head>
+<body>
+<div class="main-container">
+<h1>SAKR Builder (Alpha)</h1>
+<div class ="row">
+    <div class = "col col-narrow">
+            <!--input type="text" id="author" placeholder="Author (optional)"-->
+            <!-- Файлы -->
+
+            <div class="file-upload-container file-upload-text">
+                <div id="edidBtn" class="file-upload-primary" role="button" tabindex="0" aria-label="Upload EDID TXT">
+                    <h2 id="edidUploadTitle" class="section-title">Click here to upload your txt-file</h2>
+                </div>
+                <span id="edidUploadAnother" class="file-upload-another is-hidden" role="button" tabindex="0">Upload another file</span>
+                <input type="file" id="edidFile" accept=".txt" autocomplete="off" hidden>
+            </div>
+            <div class = "disabled-ui">
+            <div class="row">
+                <div class="col">
+                    <input type="text" id="edidSearch" placeholder="Search EDID..." />
+                </div> 
+            </div>
+            <div id="edidList">
+                <!-- EDID кнопки будут добавляться сюда -->
+            </div>
+            <div class="row toggle-controls">
+                <div class="col">   
+                    <label class="switch">
+                        <input type="checkbox" class="switch-input" id="showNotEditedToggle" autocomplete="off">
+                        <span class="slider"></span>
+                        <span class="switch-text">Оnly not edited</span>
+                    </label>
+                </div>
+                <div class="col">  
+                    <label class="switch">
+                        <input type="checkbox" class="switch-input" id="multiSelectToggle" autocomplete="off">
+                        <span class="slider"></span>
+                        <span class="switch-text">Multi-selection</span>
+                    </label>
+                </div>  
+                <div class="col">  
+                    <div class="file-upload-container">
+                        <span id="robcoBtn" class="upload-link" role="button" tabindex="0">Import RobCo INI</span>
+                        <input type="file" id="robcoFile" accept=".ini" autocomplete="off" hidden>
+                    </div>
+                </div>  
+
+
+
+
+                </div>
+            </div>
+    </div>
+    <div class = "col col-wide disabled-ui">
+        <div id="keywordContainer" style = "padding-bottom: 30px;">
+            <div class="tag-modules">
+                <div class="tag-modules-row">
+                    <div class="tag-module">
+                        <h3 class="tag-module-title"><img class="module-title-icon" src="icons/sakr/armortop.svg" alt="" aria-hidden="true">Armor Top</h3>
+                        <div class="segmented module-switch">
+                            <label class="segmented-item"><input type="radio" name="armortop" value="sakr_kwd_armorTopFull" data-formid-old="802" data-formid-new="801"><span>Full</span></label>
+                            <label class="segmented-item"><input type="radio" name="armortop" value="sakr_kwd_armorTopBreast" data-formid-old="803" data-formid-new="802"><span>Top</span></label>
+                            <label class="segmented-item"><input type="radio" name="armortop" value="sakr_kwd_armorTopLewd" data-formid-old="804" data-formid-new="803"><span>Lewd</span></label>
+                        </div>
+                    </div>
+
+                    <div class="tag-module">
+                        <h3 class="tag-module-title"><img class="module-title-icon" src="icons/sakr/top.svg" alt="" aria-hidden="true">Top</h3>
+                        <div class="segmented module-switch">
+                            <label class="segmented-item"><input type="radio" name="top" value="sakr_kwd_topFull" data-formid-old="81A" data-formid-new="81A"><span>Full</span></label>
+                            <label class="segmented-item"><input type="radio" name="top" value="sakr_kwd_topCleavage" data-formid-old="81B" data-formid-new="862"><span>Cleavage</span></label>
+                            <label class="segmented-item"><input type="radio" name="top" value="sakr_kwd_topLowCutCleavage" data-formid-old="81C" data-formid-new="81D"><span>Low Cut</span></label>
+                        </div>
+                        <div class="top-mod-grid module-checks">
+                            <label class="segmented-check-item"><input type="checkbox" name="top" value="sakr_kwd_topTagTankTop" data-formid-old="81E" data-formid-new="878"><span>Tank</span></label>
+                            <label class="segmented-check-item"><input type="checkbox" name="top" value="sakr_kwd_topTagCropTop" data-formid-old="81D" data-formid-new="874"><span>Crop</span></label>
+                            <label class="segmented-check-item"><input type="checkbox" name="top" value="sakr_kwd_topTagHalterTop" data-formid-old="81F" data-formid-new="875"><span>Halter</span></label>
+                            <label class="segmented-check-item"><input type="checkbox" name="top" value="sakr_kwd_topTagSideBoob" data-formid-old="820" data-formid-new="821"><span>Side Boob</span></label>
+                            <label class="segmented-check-item"><input type="checkbox" name="top" value="sakr_kwd_topTagTight" data-formid-old="821" data-formid-new="823"><span>Tight</span></label>
+                            <label class="segmented-check-item"><input type="checkbox" name="top" value="sakr_kwd_topTagSheer" data-formid-old="822" data-formid-new="820"><span>Semi transparent</span></label>
+                        </div>
+                    </div>
+
+                    <div class="tag-module">
+                        <h3 class="tag-module-title"><img class="module-title-icon" src="icons/sakr/Bra.svg" alt="" aria-hidden="true">Bra</h3>
+                        <div class="segmented module-switch">
+                            <label class="segmented-item"><input type="radio" name="bra" value="sakr_kwd_braNormal" data-formid-old="80B" data-formid-new="80B"><span>Normal</span></label>
+                            <label class="segmented-item"><input type="radio" name="bra" value="sakr_kwd_braBikini" data-formid-old="80C" data-formid-new="80C"><span>Bikini</span></label>
+                            <label class="segmented-item"><input type="radio" name="bra" value="sakr_kwd_braMicroBikini" data-formid-old="80D" data-formid-new="80D"><span>Micro Bikini</span></label>
+                        </div>
+                        <div class="top-mod-grid module-checks">
+                            <label class="segmented-check-item"><input type="checkbox" name="bra" value="sakr_kwd_braTagSheer" data-formid-old="80E" data-formid-new="80E"><span>Semi transparent</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tag-modules-row">
+                    <div class="tag-module">
+                        <h3 class="tag-module-title"><img class="module-title-icon" src="icons/sakr/armorbot.svg" alt="" aria-hidden="true">Armor Bottom</h3>
+                        <div class="segmented module-switch">
+                            <label class="segmented-item"><input type="radio" name="armorbot" value="sakr_kwd_armorBottomFull" data-formid-old="805" data-formid-new="804"><span>Full</span></label>
+                            <label class="segmented-item"><input type="radio" name="armorbot" value="sakr_kwd_armorBottomButt" data-formid-old="806" data-formid-new="805"><span>Butt</span></label>
+                            <label class="segmented-item"><input type="radio" name="armorbot" value="sakr_kwd_armorBottomLewd" data-formid-old="807" data-formid-new="806"><span>Lewd</span></label>
+                        </div>
+                    </div>
+
+                    <div class="tag-module">
+                        <h3 class="tag-module-title"><img class="module-title-icon" src="icons/sakr/pants.svg" alt="" aria-hidden="true">Pants</h3>
+                        <div class="segmented module-switch">
+                            <label class="segmented-item"><input type="radio" name="pants" value="sakr_kwd_pantsLong" data-formid-old="80B" data-formid-new="80B"><span>Long</span></label>
+                            <label class="segmented-item"><input type="radio" name="pants" value="sakr_kwd_pantsShorts" data-formid-old="80F" data-formid-new="80C"><span>Shorts</span></label>
+                            <label class="segmented-item"><input type="radio" name="pants" value="sakr_kwd_pantsHotPants" data-formid-old="810" data-formid-new="80D"><span>Hot Pants</span></label>
+                            <label class="segmented-item"><input type="radio" name="pants" value="sakr_kwd_pantsThong" data-formid-old="80F" data-formid-new="80E"><span>Thong</span></label>
+                        </div>
+                        <div class="top-mod-grid module-checks">
+                            <label class="segmented-check-item"><input type="checkbox" name="pants" value="sakr_kwd_pantsTagTight" data-formid-old="812" data-formid-new="810"><span>Skin Tight</span></label>
+                            <label class="segmented-check-item"><input type="checkbox" name="pants" value="sakr_kwd_pantsTagSheer" data-formid-old="813" data-formid-new="811"><span>Semi transparent</span></label>
+                        </div>
+                    </div>
+
+                    <div class="tag-module">
+                        <h3 class="tag-module-title"><img class="module-title-icon" src="icons/sakr/panty.svg" alt="" aria-hidden="true">Panty</h3>
+                        <div class="segmented module-switch">
+                            <label class="segmented-item"><input type="radio" name="panty" value="sakr_kwd_pantyNormal" data-formid-old="808" data-formid-new="807"><span>Normal</span></label>
+                            <label class="segmented-item"><input type="radio" name="panty" value="sakr_kwd_pantyThong" data-formid-old="809" data-formid-new="808"><span>Thong</span></label>
+                            <label class="segmented-item"><input type="radio" name="panty" value="sakr_kwd_pantyGString" data-formid-old="80A" data-formid-new="809"><span>GString</span></label>
+                        </div>
+                        <div class="top-mod-grid module-checks">
+                            <label class="segmented-check-item"><input type="checkbox" name="panty" value="sakr_kwd_pantyTagSheer" data-formid-old="80F" data-formid-new="80A"><span>Semi transparent</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tag-modules-row">
+                    <div class="tag-module">
+                        <h3 class="tag-module-title"><img class="module-title-icon" src="icons/sakr/skirt.svg" alt="" aria-hidden="true">Skirt</h3>
+                        <div class="segmented module-switch">
+                            <label class="segmented-item"><input type="radio" name="skirt" value="sakr_kwd_skirtLong" data-formid-old="814" data-formid-new="815"><span>Long</span></label>
+                            <label class="segmented-item"><input type="radio" name="skirt" value="sakr_kwd_skirtShort" data-formid-old="815" data-formid-new="818"><span>Short</span></label>
+                            <label class="segmented-item"><input type="radio" name="skirt" value="sakr_kwd_skirtMini" data-formid-old="816" data-formid-new="819"><span>Mini</span></label>
+                            <label class="segmented-item"><input type="radio" name="skirt" value="sakr_kwd_skirtMicro" data-formid-old="817" data-formid-new="81A"><span>Micro</span></label>
+                        </div>
+                        <div class="top-mod-grid module-checks">
+                            <label class="segmented-check-item"><input type="checkbox" name="skirt" value="sakr_kwd_skirtTagTight" data-formid-old="818" data-formid-new="816"><span>Skin Tight</span></label>
+                            <label class="segmented-check-item"><input type="checkbox" name="skirt" value="sakr_kwd_skirtTagSheer" data-formid-old="819" data-formid-new="817"><span>Semi transparent</span></label>
+                        </div>
+                    </div>
+
+                    <div class="tag-module">
+                        <h3 class="tag-module-title"><img class="module-title-icon" src="icons/sakr/heels.svg" alt="" aria-hidden="true">Heels</h3>
+                        <div class="top-mod-grid module-checks">
+                            <label class="segmented-check-item"><input type="checkbox" name="heels" value="sakr_kwd_shoesHighHeels" data-formid-old="26B4" data-formid-new="825"><span>High heel shoes</span></label>
+                            <label class="segmented-check-item"><input type="checkbox" name="heels" value="sakr_kwd_shoesKillerHeels" data-formid-old="26B5" data-formid-new="828"><span>Killer heels</span></label>
+                        </div>
+                    </div>
+
+                    <div class="tag-module">
+                        <h3 class="tag-module-title"><img class="module-title-icon" src="icons/sakr/Stocking.svg" alt="" aria-hidden="true">Stocking</h3>
+                        <div class="top-mod-grid module-checks">
+                            <label class="segmented-check-item"><input type="checkbox" name="stocking" value="sakr_kwd_stockingsLong" data-formid-old="26B1" data-formid-new="824"><span>Knee-high</span></label>
+                            <label class="segmented-check-item"><input type="checkbox" name="stocking" value="sakr_kwd_stockingsTagShiny" data-formid-old="26B2" data-formid-new="826"><span>Shiny material</span></label>
+                            <label class="segmented-check-item"><input type="checkbox" name="stocking" value="sakr_kwd_stockingsTagSheer" data-formid-old="26B3" data-formid-new="827"><span>Semi transparent</span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <h3>Templates</h3>
+    <button class="template-btn"
+        data-template="ClearAll"
+        data-keywords="">
+        Clear All
+    </button>
+
+    <button class="template-btn"
+        data-template="TantTop"
+        data-keywords="sakr_kwd_topFull,sakr_kwd_topTagTankTop">
+        Tank Top 
+    </button>
+
+    <button class="template-btn"
+        data-template="CropTop "
+        data-keywords="sakr_kwd_topCleavage, sakr_kwd_topTagCropTop">
+        Crop Top 
+    </button>
+
+    <button class="template-btn"
+        data-template="LowCutHalter"
+        data-keywords="sakr_kwd_topLowCutCleavage, sakr_kwd_topTagHalterTop">
+        Low Cut Halter
+    </button>
+    <button class="template-btn"
+        data-template="SideCleavage"
+        data-keywords="sakr_kwd_topCleavage, sakr_kwd_topTagSideBoob">
+        Side Cleavage
+    </button>
+    <button class="template-btn"
+        data-template="TightTankCleavage"
+        data-keywords="sakr_kwd_topCleavage, sakr_kwd_topTagTankTop, sakr_kwd_topTagTight">
+        Tight Tank Cleavage
+    </button>
+
+
+    <button class="template-btn"
+        data-template="ShortsTight"
+        data-keywords="sakr_kwd_pantsShorts,sakr_kwd_pantsTagTight">
+        Shorts Tight 
+    </button>
+
+    <button class="template-btn"
+        data-template="TightHotPants"
+        data-keywords="sakr_kwd_pantsShorts,sakr_kwd_pantsTagTight">
+        Tight Hot Pants
+    </button>
+
+    <button class="template-btn"
+        data-template="TightPants"
+        data-keywords="sakr_kwd_pantsLong,sakr_kwd_pantsTagTight">
+        Tight Pants
+    </button>
+
+    <button class="template-btn"
+        data-template="TightMiniSkirt "
+        data-keywords="sakr_kwd_skirtMini,sakr_kwd_skirtTagTight">
+        Tight Mini Skirt 
+    </button>
+
+    <button class="template-btn"
+        data-template="TightMicroSkirt"
+        data-keywords="sakr_kwd_skirtMicro,sakr_kwd_skirtTagTight">
+        Tight Micro Skirt 
+    </button>
+
+    <button class="template-btn"
+        data-template="VirginKiller"
+        data-keywords="sakr_kwd_topFull,sakr_kwd_topTagHalterTop,sakr_kwd_skirtMini">
+        Virgin Killer Dress
+    </button>
+
+    <button class="template-btn"
+        data-template="Leotard"
+        data-keywords="sakr_kwd_topTagTankTop,sakr_kwd_pantyNormal,sakr_kwd_topFull">
+        Leotard
+    </button>
+</div>
+</div>
+<div class ="row sakr-output-row">
+<div class = "col disabled-ui"> 
+    <div id="exportdataform">
+        <button class="generate-btn">Generate INI</button>
+        <button class="copy-btn">Copy</button>
+        <button class="export-btn">Export</button>
+        <textarea readonly autocomplete="off"></textarea>
+    </div>
+</div>
+<div class="col">
+    <div class="sakr-help-panel">
+        <p>This tool is designed for use with <a href="https://www.loverslab.com/files/file/47181-skimpy-armor-keyword-resource-redux/"> SAKR Redux</a>. It may also work with the <a href="https://www.loverslab.com/files/file/26435-skimpy-armor-keyword-resource-4132023/">old SAKR version</a>, but you will need the base Complex Sorter settings from the Redux version.</p>
+        <p><strong>Instructions:</strong></p>
+        <ol>
+            <li>Download this <a id="sakrFo4EditScriptLink" href="#" data-download-url="scripts/fo4edit/ARMO_Export_For_SAKR.pas" download="ARMO_Export_For_SAKR.pas">FO4Edit script</a> and copy it to <code>FO4Edit\Edit Scripts</code>.</li>
+            <li>Run FO4Edit with your target clothing plugin, select it, right-click, and choose <code>Apply Script</code>.</li>
+            <li>Type <code>ARMO_Export_For_SAKR</code> in search, run the script, and save the result.</li>
+            <li>Upload the file to this site and edit keywords. You can also upload an existing RobCo Patch for your clothing, and the site will automatically assign all keywords.</li>
+            <li>To get the result, click <code>Generate INI</code> and <code>Export</code>. Move the output file to <code>Data\Complex Sorter\Plugins</code>.</li>
+            <li>Run the sorter as usual. If you have never used Complex Sorter, read all <a href = "https://www.nexusmods.com/fallout4/mods/51307">instructions from 4estGimp.</a></li>
+        </ol>
+        <p>This is an alpha version. If you like what I am doing, thank me. Thank you!</p>
+    </div>
+</div>
+</div>
+</div>
+<script src="js/kinata-meme-api.js"></script>
+<script src="js/SAKRBuilder.js"></script>
+</body>
+</html>
