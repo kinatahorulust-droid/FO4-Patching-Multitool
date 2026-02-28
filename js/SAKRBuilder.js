@@ -557,11 +557,31 @@ class SAKRBuilder {
 
         for (const sig in groups) {
             const group = groups[sig];
-            const edidLine = group.edids.map(formatEdidForExport).join("|");
             const kwLine = group.keywords
                 .map(k => `SPECIAL:AddKeyword:KEYWORDS:${k}`)
                 .join(", ");
-            out += `EDID equals ${edidLine} = ${kwLine}\n\n`;
+
+            const plainEdids = [];
+            const spacedEdids = [];
+            group.edids.forEach((edid) => {
+                const value = String(edid || "").trim();
+                if (!value) return;
+                if (/\s/.test(value)) {
+                    spacedEdids.push(value);
+                } else {
+                    plainEdids.push(value);
+                }
+            });
+
+            if (plainEdids.length) {
+                out += `EDID equals ${plainEdids.map(formatEdidForExport).join("|")} = ${kwLine}\n\n`;
+            }
+
+            // Complex Sorter parser breaks when quoted EDIDs with spaces are combined via "|".
+            // Emit them one-by-one instead.
+            spacedEdids.forEach((edid) => {
+                out += `EDID equals ${formatEdidForExport(edid)} = ${kwLine}\n\n`;
+            });
         }
 
         return out;
