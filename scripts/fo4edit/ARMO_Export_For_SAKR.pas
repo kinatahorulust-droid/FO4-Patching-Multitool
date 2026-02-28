@@ -1,11 +1,10 @@
 unit UserScript;
 
 var
-  gRecords: TStringList;
-  gTotalArmo: Integer;
-  gSkippedOtherPlugins: Integer;
+  gPluginOrder: TStringList;
+  gPluginBuckets: TStringList;
   gOutputPath: string;
-  gPrimaryPlugin: string;
+  gTotalArmo: Integer;
 
 function SafeValue(e: IInterface; const path: string): string;
 begin
@@ -24,17 +23,36 @@ begin
     Result := formIdText;
 end;
 
+function GetPluginBucket(const pluginName: string): TStringList;
+var
+  idx: Integer;
+  listObj: TObject;
+begin
+  idx := gPluginOrder.IndexOf(pluginName);
+  if idx = -1 then begin
+    gPluginOrder.Add(pluginName);
+    listObj := TStringList.Create;
+    TStringList(listObj).CaseSensitive := False;
+    TStringList(listObj).Duplicates := dupIgnore;
+    gPluginBuckets.AddObject(pluginName, listObj);
+    Result := TStringList(listObj);
+    Exit;
+  end;
+
+  Result := TStringList(gPluginBuckets.Objects[idx]);
+end;
+
 function Initialize: Integer;
 var
   dlgSave: TSaveDialog;
 begin
   Result := 0;
-  gRecords := TStringList.Create;
-  gRecords.CaseSensitive := False;
-  gRecords.Duplicates := dupIgnore;
+
+  gPluginOrder := TStringList.Create;
+  gPluginBuckets := TStringList.Create;
+  gPluginBuckets.CaseSensitive := False;
+  gPluginBuckets.Duplicates := dupIgnore;
   gTotalArmo := 0;
-  gSkippedOtherPlugins := 0;
-  gPrimaryPlugin := '';
 
   dlgSave := TSaveDialog.Create(nil);
   try
@@ -61,6 +79,7 @@ var
   edid: string;
   fullName: string;
   line: string;
+  bucket: TStringList;
 begin
   Result := 0;
   if not Assigned(e) then
@@ -75,14 +94,6 @@ begin
     Exit;
 
   pluginName := GetFileName(GetFile(e));
-  if gPrimaryPlugin = '' then
-    gPrimaryPlugin := pluginName;
-
-  // SAKR TXT format supports only one plugin header.
-  if pluginName <> gPrimaryPlugin then begin
-    Inc(gSkippedOtherPlugins);
-    Exit;
-  end;
 
   formId := NormalizeFormID(IntToHex(FixedFormID(e), 8));
   edid := SafeValue(e, 'EDID');
@@ -92,38 +103,56 @@ begin
   if fullName = '' then
     fullName := edid;
 
-  // Required by SAKR parser: EDID|FORMID (third field is optional and ignored by parser).
+  // SAKR batch format: plugin line, then EDID|FORMID|NAME lines.
   line := edid + '|' + formId + '|' + fullName;
-  gRecords.Add(line);
+
+  bucket := GetPluginBucket(pluginName);
+  bucket.Add(line);
   Inc(gTotalArmo);
 end;
 
 function Finalize: Integer;
 var
+  i: Integer;
+  pluginName: string;
+  bucket: TStringList;
   outLines: TStringList;
 begin
   Result := 0;
-  outLines := TStringList.Create;
-  try
-    if gPrimaryPlugin = '' then begin
-      AddMessage('No ARMO records exported.');
-      Exit;
+
+  if gPluginOrder.Count = 0 then begin
+    AddMessage('No ARMO records exported.');
+  end else begin
+    outLines := TStringList.Create;
+    try
+      for i := 0 to gPluginOrder.Count - 1 do begin
+        pluginName := gPluginOrder[i];
+        bucket := TStringList(gPluginBuckets.Objects[i]);
+        bucket.Sort;
+
+        outLines.Add(pluginName);
+        outLines.AddStrings(bucket);
+        outLines.Add('');
+      end;
+
+      outLines.SaveToFile(gOutputPath);
+      AddMessage('Saved: ' + gOutputPath);
+      for i := 0 to gPluginOrder.Count - 1 do begin
+        pluginName := gPluginOrder[i];
+        bucket := TStringList(gPluginBuckets.Objects[i]);
+        AddMessage('  ' + pluginName + ' records: ' + IntToStr(bucket.Count));
+      end;
+
+      AddMessage('ARMO batch export done. Total records: ' + IntToStr(gTotalArmo));
+    finally
+      outLines.Free;
     end;
-
-    gRecords.Sort;
-
-    outLines.Add('plugin:' + gPrimaryPlugin);
-    outLines.AddStrings(gRecords);
-
-    outLines.SaveToFile(gOutputPath);
-    AddMessage('ARMO export done. Records: ' + IntToStr(gTotalArmo));
-    if gSkippedOtherPlugins > 0 then
-      AddMessage('Skipped records from other plugins: ' + IntToStr(gSkippedOtherPlugins));
-    AddMessage('Saved successfully.');
-  finally
-    outLines.Free;
-    gRecords.Free;
   end;
+
+  for i := 0 to gPluginBuckets.Count - 1 do
+    gPluginBuckets.Objects[i].Free;
+  gPluginBuckets.Free;
+  gPluginOrder.Free;
 end;
 
 end.
